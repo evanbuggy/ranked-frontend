@@ -1,10 +1,41 @@
-# CS4135 Project Frontend
+# CS4135 Project Frontend ([ranked-frontend](https://github.com/evanbuggy/ranked-frontend))
 
 Welcome to the frontend of our CS4135 project.
 
-If you are looking for the backend, check [here](https://github.com/evanbuggy/ranked-backend).
+If you are looking for the backend, check [ranked-backend](https://github.com/evanbuggy/ranked-backend) (update the link if your team uses a different URL).
 
-Our project is a web app that will be able to calculate and track player's ELO for fighting game tournaments.
+Our project is a web app that calculates and tracks player Elo for fighting game tournaments. This repo includes the **full tournament UI** (Vite + React + MUI) wired to the Spring API.
+
+## Quick start
+
+```bash
+git clone https://github.com/evanbuggy/ranked-frontend.git
+cd ranked-frontend
+npm install
+cp .env.example .env   # set VITE_API_BASE=http://localhost:8080
+npm run dev
+```
+
+Run the **backend on port 8080** in another terminal. Open the URL Vite prints (usually `http://localhost:5173`).
+
+Push / two-repo notes: [../docs/PUSH-TO-TWO-REPOS.md](../docs/PUSH-TO-TWO-REPOS.md) · API / CORS: [../docs/FRONTEND-BACKEND-INTEGRATION.md](../docs/FRONTEND-BACKEND-INTEGRATION.md)
+
+### Optional: embed UI into a local Spring `static/` folder (monorepo only)
+
+From a layout where this `frontend/` sits next to `backend/`:
+
+```bash
+npm run build:to-backend
+```
+
+Then start Spring from `backend/` — UI at `http://localhost:8080/`.
+
+| Variable | Description |
+|----------|-------------|
+| `VITE_API_BASE` | Backend URL, no trailing slash (e.g. `http://localhost:8080`) |
+| `VITE_API_RELATIVE=1` | Use `/api` + Vite dev proxy (see `vite.config.js`) |
+
+---
 
 # Contributing
 
@@ -12,41 +43,32 @@ Our project is a web app that will be able to calculate and track player's ELO f
 
 ## Windows
 
-The easiest way to develop on Windows is through WSL with Ubuntu. An official Microsoft guide on installation can be found [here](https://learn.microsoft.com/en-us/windows/wsl/install).
+The easiest way to develop on Windows is through WSL with Ubuntu. See [Microsoft’s WSL install guide](https://learn.microsoft.com/en-us/windows/wsl/install).
 
 ## Visual Studio Code and WSL
 
-The WSL extension for VS Code makes development in your Linux environment much easier. An official Microsoft guide on installation can be found [here](https://code.visualstudio.com/docs/remote/wsl).
+The [WSL extension](https://code.visualstudio.com/docs/remote/wsl) for VS Code makes development in your Linux environment much easier.
 
 ## Dependencies
 
 ### Node Version Manager (NVM)
 
-1. Run `sudo apt-get update` to ensure your package repository is updated.
-2. Install curl with `sudo apt install curl`.
-3. Run `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash` to install NVM. Verify the installation with `nvm --version`.
-4. Install the latest version of Node.js with `nvm install --lts`, or install a specific version instead.
-5. You can install and use different Node versions if necessary. List installed versions of Node with `nvm ls` and use a specific version with `nvm use <version>`, for example, `nvm use 25.2.1`.
+1. `sudo apt-get update`
+2. `sudo apt install curl`
+3. `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash` — then `nvm install --lts`
 
-### Installing packages with Node Package Manager (NPM)
+### NPM
 
-1. Clone the project with `git clone https://github.com/evanbuggy/ranked-frontend.git`.
-2. Verify your NPM installation with `npm --version`.
-3. Install the project's dependencies with `npm install`. This will automatically install all the packages detailed in the `package.json` file to `/node_modules`. The .gitignore file in this repo should already exclude this folder from commits.
-4. Test the app with `npm run dev`.
+1. Clone this repo.
+2. `npm install`
+3. `npm run dev`
 
-# Building with Docker
+## Building with Docker
 
-We use Docker to containerize our frontend to aid in building and deployment. This page will be updated over time when necessary but for now will cover basic Docker commands to help you build an image and run a container.
+We use Docker for deployment. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) (works with WSL). Then:
 
-## Installing Docker
+```bash
+docker compose up -d --build
+```
 
-Even if you are on Windows using WSL, install Docker Desktop through Windows as it works alongside WSL. Docker Desktop will make the installation process easy and will install the Docker Engine for you. Get it from [here](https://www.docker.com/products/docker-desktop/).
-
-## Docker commands
-
-Docker Compose makes building and running easy. Simply use `docker compose up -d --build` and it should build your image and run the container. You can see the container visible via Docker Desktop.
-
-<img width="1617" height="167" alt="image" src="https://github.com/user-attachments/assets/4fec2345-f0ab-4aff-abe3-b932aaff6737" />
-
-You can use the command `docker compose down` to stop the containers. You can use the command `docker ps -a` to list all currently running containers.
+`docker compose down` stops containers. `docker ps -a` lists containers.
