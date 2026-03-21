@@ -2,7 +2,7 @@
 
 Welcome to the frontend of our CS4135 project.
 
-If you are looking for the backend, check [ranked-backend](https://github.com/evanbuggy/ranked-backend) (update the link if your team uses a different URL).
+If you are looking for the backend, see **[evanbuggy/ranked-backend](https://github.com/evanbuggy/ranked-backend)** (`https://github.com/evanbuggy/ranked-backend.git`, default branch **`master`**).
 
 Our project is a web app that calculates and tracks player Elo for fighting game tournaments. This repo includes the **full tournament UI** (Vite + React + MUI) wired to the Spring API.
 
